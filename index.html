@@ -45,12 +45,34 @@ class="w-full p-4 border rounded-xl"
 <button
 class="w-full bg-[#2E4A7D] text-white p-4 rounded-xl font-bold"
 >
-Entrar na fila do Beta
+<button onclick="enviarDados()">
+</button>
 </button>
 
 </form>
 
 </div>
 
-</body>
-</html>
+</body><script>
+
+async function enviarDados(){
+
+let email = document.getElementById("email").value
+let whatsapp = document.getElementById("whatsapp").value
+
+await fetch("COLE_AQUI_SEU_LINK_DO_SCRIPThttps://script.google.com/macros/s/AKfycbyqmekQ8U6MutzEtJBhQ0BL088UXXHMNhqylVLg9yhZq9l_vCwkJ5htnzBMOxWUZhpK3Q/exec",{
+method:"POST",
+body:JSON.stringify({
+email:email,
+whatsapp:whatsapp
+})
+})
+
+alert("Você entrou na fila do beta 🚀")
+
+}
+
+</script>
+</html><input type="email" id="email" placeholder="Seu e-mail">
+
+<input type="text" id="whatsapp" placeholder="Seu WhatsApp">
