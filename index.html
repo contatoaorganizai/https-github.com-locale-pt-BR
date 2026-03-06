@@ -1,79 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Descomplicaí | O Waze das Finanças</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color:#F6F9FB;
-}
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descomplicaí | Lista do Beta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-6">
 
-<body class="p-10">
+  <div class="w-full max-w-2xl bg-white rounded-3xl shadow-xl p-8 md:p-10">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4">
+      Descomplicaí 📍
+    </h1>
 
-<div class="max-w-xl mx-auto bg-white p-8 rounded-3xl shadow-lg">
+    <p class="text-gray-600 text-xl mb-8">
+      O GPS que te diz quanto você pode gastar hoje.
+    </p>
 
-<h1 class="text-3xl font-bold text-[#2E4A7D] mb-4">
-Descomplicaí 📍
-</h1>
+    <div class="space-y-4">
+      <input
+        type="email"
+        id="email"
+        placeholder="Seu e-mail"
+        class="w-full rounded-2xl border border-gray-200 px-5 py-4 text-lg outline-none focus:border-blue-500"
+      />
 
-<p class="text-gray-500 mb-6">
-O GPS que te diz quanto você pode gastar hoje.
-</p>
+      <input
+        type="text"
+        id="whatsapp"
+        placeholder="Seu WhatsApp"
+        class="w-full rounded-2xl border border-gray-200 px-5 py-4 text-lg outline-none focus:border-blue-500"
+      />
 
-<form class="space-y-4">
+      <button
+        type="button"
+        onclick="enviarDados()"
+        class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold rounded-2xl py-4 text-lg transition"
+      >
+        Entrar na fila do Beta
+      </button>
+    </div>
 
-<input
-type="email"
-placeholder="Seu e-mail"
-class="w-full p-4 border rounded-xl"
-/>
+    <p id="mensagem" class="mt-6 text-center text-green-600 font-semibold hidden">
+      Você entrou na fila do beta 🚀
+    </p>
+  </div>
 
-<input
-type="text"
-placeholder="Seu WhatsApp"
-class="w-full p-4 border rounded-xl"
-/>
+  <script>
+    async function enviarDados() {
+      const email = document.getElementById("email").value.trim();
+      const whatsapp = document.getElementById("whatsapp").value.trim();
+      const mensagem = document.getElementById("mensagem");
 
-<button
-class="w-full bg-[#2E4A7D] text-white p-4 rounded-xl font-bold"
->
-<button onclick="enviarDados()">
-</button>
-</button>
+      if (!email || !whatsapp) {
+        alert("Preencha seu e-mail e WhatsApp.");
+        return;
+      }
 
-</form>
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbyqmekQ8U6MutzEtJBhQ0BL088UXXHMNhqylVLg9yhZq9l_vCwkJ5htnzBMOxWUZhpK3Q/exec", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            whatsapp: whatsapp
+          })
+        });
 
-</div>
+        mensagem.classList.remove("hidden");
+        document.getElementById("email").value = "";
+        document.getElementById("whatsapp").value = "";
+      } catch (erro) {
+        alert("Não consegui enviar agora. Tente novamente.");
+        console.error(erro);
+      }
+    }
+  </script>
 
-</body><script>
-
-async function enviarDados(){
-
-let email = document.getElementById("email").value
-let whatsapp = document.getElementById("whatsapp").value
-
-await fetch("COLE_AQUI_SEU_LINK_DO_SCRIPThttps://script.google.com/macros/s/AKfycbyqmekQ8U6MutzEtJBhQ0BL088UXXHMNhqylVLg9yhZq9l_vCwkJ5htnzBMOxWUZhpK3Q/exec",{
-method:"POST",
-body:JSON.stringify({
-email:email,
-whatsapp:whatsapp
-})
-})
-
-alert("Você entrou na fila do beta 🚀")
-
-}
-
-</script>
-</html><input type="email" id="email" placeholder="Seu e-mail">
-
-<input type="text" id="whatsapp" placeholder="Seu WhatsApp">
-
+</body>
+</html>
